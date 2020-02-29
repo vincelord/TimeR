@@ -1,0 +1,74 @@
+﻿<base:BasePage x:Class="VTility.Pages.PageOptions"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:VTility.Pages"
+      mc:Ignorable="d"
+      xmlns:base="clr-namespace:VTility"
+      d:DesignWidth="512"
+      d:DesignHeight="512"
+      Title="PageOptions"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    Background="{DynamicResource MaterialDesignPaper}"
+    TextElement.FontWeight="Medium"
+    TextElement.FontSize="14"
+    FontFamily="{materialDesign:MaterialDesignFont}"
+>
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+                <Setter Property="Margin" Value="15,0,0,0"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+    <!--<Viewbox Stretch="Uniform">-->
+            <!--<Grid DockPanel.Dock="Top" Background="Black">
+                <Grid>
+                    <Label x:Name="label" Content="Countdowner" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontFamily="Broadway" FontSize="24" />
+                    <Image x:Name="image" HorizontalAlignment="Right" Height="21" Margin="0,-2,29,18.333" VerticalAlignment="Center" Width="15" Source="/VTility;component/Resources/icon3.png" />
+                </Grid>
+            </Grid>-->
+            <!--<Grid DockPanel.Dock="Bottom" Background="#FF080808" Height="32">
+                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Foreground="White" FontSize="8" FontFamily="Amatic SC" HorizontalAlignment="Left" Margin="0,0,0,-0.333" Width="130" Padding="3,2"><Run Text="last update 2018-06-03" /></TextBlock>
+                <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Foreground="White" FontSize="8" FontFamily="Amatic SC" TextAlignment="Right" HorizontalAlignment="Right" Margin="0,0,0,-0.667" Width="134" Padding="3,2"><Run Text="the project started on 2016-06-01." /></TextBlock>
+            </Grid>-->
+            <Grid>
+            <Label x:Name="label" Content="Options" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24" />
+            <WrapPanel Orientation="Horizontal" Margin="0,50,15,0">
+
+                <GroupBox x:Name="box_options_shutdown" Header="Shutdown action" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <Grid>
+                        <CheckBox x:Name="opt_force" Content="Force" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="100,15,0,0" />
+                        <ComboBox x:Name="opt_shutdown" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0">
+                            <ComboBoxItem Content="Shutdown" IsSelected="True" />
+                            <ComboBoxItem Content="Save Energy" />
+                            <ComboBoxItem Content="Reboot" />
+                        </ComboBox>
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="box_options_application" Header="Application" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <StackPanel Orientation="Vertical">
+                        <CheckBox x:Name="opt_autostart" Content="Autostart" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="opt_autostart_checked" Unchecked="opt_autostart_unchecked" VerticalContentAlignment="Center" />
+                        <Button x:Name="ButtonClean" Content="Clean Registry" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ButtonClean_Click" />
+                        <Button Content="Show Registry" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ButtonRegistry_Click" />
+                        <Button x:Name="ButtonSave" Content="Save options" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ButtonSave_Click" IsCancel="True" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox x:Name="box_options_hotkey" Header="Hotkey" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" PreviewKeyDown="HotkeyBox_PreviewKeyDown">
+                    <Grid>
+                        <CheckBox x:Name="opt_useHotkey" Content="Use Hotkey" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="opt_autostart_checked" Unchecked="opt_autostart_unchecked" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="hotkeyBox" Margin="0,30,0,0" Text="{Binding CurrentHotKey}" />
+                    </Grid>
+                </GroupBox>
+            <!--<GroupBox Header="Application" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                <Grid>
+                    <Button Content="Save options" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ButtonSave_Click" IsCancel="True" />
+                </Grid>
+            </GroupBox>-->
+        </WrapPanel>
+        </Grid>
+
+    <!--</Viewbox>-->
+</base:BasePage>

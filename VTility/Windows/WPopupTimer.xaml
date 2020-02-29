@@ -1,0 +1,73 @@
+﻿<base:BasePopup
+        x:Class="VTility.Windows.WPopupTimer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:base="clr-namespace:VTility"
+        xmlns:local="clr-namespace:VTility.Windows"
+        mc:Ignorable="d"
+        Style="{StaticResource PopupWindowStyle}"
+        Title="Popup Window"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="Transparent"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}">
+    <!-- This content will be displayed in the ContentPresenter. -->
+    <WrapPanel Orientation="Vertical">
+        <TextBlock TextWrapping="Wrap">
+            <Bold>Timer notification</Bold>
+        </TextBlock>
+
+        <TextBlock TextWrapping="Wrap">
+            Please enter time and action for the new timer.
+        </TextBlock>
+
+        <Separator />
+        <Separator />
+
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+
+            <!--<TextBox Text="00:00:00" Margin="0,0,15,0" Width="60" />-->
+
+            <materialDesign:TimePicker x:Name="TimerTime" SelectedTimeFormat="Long" Is24Hours="true" />
+
+            <ComboBox x:Name="TimerAction" Margin="15,0,0,0" SelectedIndex="0" HorizontalAlignment="Right" Width="100">
+                <ComboBoxItem Content="Notification" />
+                <ComboBoxItem Content="Shutdown" />
+                <ComboBoxItem Content="Custom" />
+            </ComboBox>
+
+            <CheckBox x:Name="WarnCheck" Content="Warn" Margin="5 5 0 5" />
+        </WrapPanel>
+
+        <WrapPanel Orientation="Horizontal">
+            <WrapPanel.Style>
+                <Style TargetType="{x:Type WrapPanel}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=TimerAction, Path=SelectedItem}" Value="Shutdown">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=TimerAction, Path=SelectedItem}" Value="Notification">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=TimerAction, Path=SelectedItem}" Value="Custom">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </WrapPanel.Style>
+
+            <ComboBox x:Name="ShutdownAction" SelectedIndex="0" Width="100">
+                <ComboBoxItem Content="Shutdown" />
+                <ComboBoxItem Content="Reboot" />
+                <ComboBoxItem Content="Sleep" />
+            </ComboBox>
+            <CheckBox x:Name="ShutdownForce" IsChecked="True" Content="Force" />
+        </WrapPanel>
+
+        <TextBox x:Name="TimerName" Text="Identifier"></TextBox>
+    </WrapPanel>
+</base:BasePopup>

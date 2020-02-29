@@ -1,0 +1,14 @@
+﻿<base:BaseWindow x:Name="WindowFrame0" x:Class="VTility.WDirectX"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VTility.Windows"
+        xmlns:base="clr-namespace:VTility"
+        mc:Ignorable="d"
+        Title="WDirectX" Height="480" Width="640" Background="{x:Null}" Topmost="True" WindowStyle="ThreeDBorderWindow">
+
+    <Grid x:Name="Griddy" ClipToBounds="True" Background="#FFDADADA">
+        <Canvas Margin="10" />
+    </Grid>
+</base:BaseWindow>

@@ -1,0 +1,136 @@
+﻿<base:BasePage x:Class="VTility.Pages.PageExperiment"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:VTility.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="300" d:DesignWidth="300"
+      xmlns:base="clr-namespace:VTility"
+      Title="PageExperiment"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}">
+
+    <Grid ClipToBounds="True" Background="#FF767676">
+        <Border BorderBrush="#FFEAEAEA" BorderThickness="2" IsHitTestVisible="True" />
+
+        <Image x:Name="ImageContainer2" />
+        <Viewbox x:Name="ViewBoxControls" VerticalAlignment="Bottom">
+            <Grid Height="70" Width="460">
+                <Grid x:Name="ControlsGridContainer" Margin="0">
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                            <GradientStop Color="#54FFFFFF" Offset="0" />
+                            <GradientStop Offset="1" Color="#19FFFFFF" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Grid x:Name="ControlsGrid" Margin="10,5,10,6">
+                        <Button x:Name="ButtonStart" Content="Start" HorizontalAlignment="Right" Margin="0,0,325,0" Width="30" Click="button_start_click" Height="13" VerticalAlignment="Bottom" FontFamily="Corbel" FontSize="9.333" BorderThickness="0" Padding="0" Foreground="#FF272727" />
+                        <Button x:Name="ButtonStop" Content="Stop" Click="button_stop_click" Height="13" VerticalAlignment="Bottom" FontFamily="Corbel" FontSize="9.333" HorizontalAlignment="Right" Width="31" BorderThickness="0" Padding="0" Margin="0,0,289,0" Foreground="#FF272727" />
+                        <Slider x:Name="SliderFPS" Margin="136,1,114,0" VerticalAlignment="Top" Maximum="100" ValueChanged="slider_value_changed" TickPlacement="TopLeft" Delay="100" Value="25" Height="25" />
+                        <TextBox x:Name="TextBoxWidth" HorizontalAlignment="Left" Text="640" Width="37" Height="13" VerticalAlignment="Bottom" UndoLimit="10" IsUndoEnabled="False" MaxLength="5" MaxLines="1" AllowDrop="True" BorderThickness="0" Background="#FFF0F0F0" TextAlignment="Center" FontFamily="Corbel" FontSize="9.333" Foreground="#FF272727" />
+                        <TextBox x:Name="TextBoxHeight" HorizontalAlignment="Left" Margin="41,0,0,0" Text="480" Width="37" Height="13" VerticalAlignment="Bottom" UndoLimit="10" IsUndoEnabled="False" MaxLength="5" MaxLines="1" AllowDrop="True" BorderThickness="0" Background="#FFF0F0F0" TextAlignment="Center" FontFamily="Corbel" FontSize="9.333" Foreground="#FF272727" />
+                        <TextBox x:Name="TextBoxURL" Margin="0,31,0,0" Text="http://lorempixel.com/640/480" Height="9" VerticalAlignment="Top" UndoLimit="10" IsUndoEnabled="False" MaxLines="1" AllowDrop="True" BorderThickness="0" Background="#FFF0F0F0" FontFamily="Corbel" HorizontalAlignment="Left" Width="137" FontSize="7" Foreground="#FF272727" />
+                        <Button x:Name="ButtonLoadPicture" Content="Load URL" Click="button_picture_online" Height="9" VerticalAlignment="Top" FontFamily="Corbel" HorizontalAlignment="Right" Width="45" Margin="0,31,258,0" FontSize="6" Padding="0" BorderThickness="0" Foreground="#FF272727" />
+                        <RadioButton x:Name="RadioRandom" Content="Random" HorizontalAlignment="Right" FontFamily="Corbel" FontSize="14.667" RenderTransformOrigin="0.5,0.5" BorderThickness="2" Margin="0,0,194,13" GroupName="AnimType" Checked="RadioRandom_Checked" Height="19" VerticalAlignment="Bottom" Foreground="#FF272727">
+                            <RadioButton.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </RadioButton.RenderTransform>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioScreen" Content="Screenshot" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Corbel" FontSize="14.667" RenderTransformOrigin="0.5,0.5" BorderThickness="2" Margin="0,0,137,14" GroupName="AnimType" Checked="RadioScreen_Checked" Foreground="#FF272727">
+                            <RadioButton.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </RadioButton.RenderTransform>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioGradient" Content="Gradient" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Corbel" FontSize="14.667" RenderTransformOrigin="0.5,0.5" BorderThickness="2" Margin="0,0,193,4" GroupName="AnimType" Checked="RadioGradient_Checked" Foreground="#FF272727">
+                            <RadioButton.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </RadioButton.RenderTransform>
+                        </RadioButton>
+                        <Grid Margin="331,0,-2,15">
+                            <Slider x:Name="SliderAlpha" Maximum="100" ValueChanged="slider_alpha_changed" Orientation="Vertical" HorizontalAlignment="Right" Width="26" TickPlacement="TopLeft" Minimum="1" Value="100" />
+                            <Slider x:Name="SliderBlue" Margin="0,0,29,0" Maximum="100" ValueChanged="slider_blue_changed" Orientation="Vertical" HorizontalAlignment="Right" Width="25" TickPlacement="TopLeft" Minimum="1" Value="1" />
+                            <Slider x:Name="SliderGreen" Margin="0,0,57,0" Maximum="100" ValueChanged="slider_green_changed" Orientation="Vertical" HorizontalAlignment="Right" Width="26" TickPlacement="TopLeft" Minimum="1" Value="1" />
+                            <Slider x:Name="SliderRed" Margin="0,0,86,0" Maximum="100" ValueChanged="slider_red_changed" Orientation="Vertical" HorizontalAlignment="Right" Width="25" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" TickPlacement="TopLeft" Minimum="1" Value="1" />
+                        </Grid>
+                        <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <RadioButton x:Name="RadioAspectKeep" Content="Keep" HorizontalAlignment="Left" FontFamily="Corbel" FontSize="13.333" IsChecked="True" RenderTransformOrigin="0.5,0.5" BorderThickness="2" GroupName="Aspect" Checked="RadioKeep_Checked" VerticalAlignment="Top" Margin="-11,10,0,-1" Padding="0" Foreground="#FF272727">
+                                <RadioButton.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                        <SkewTransform />
+                                        <RotateTransform />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </RadioButton.RenderTransform>
+                            </RadioButton>
+                            <RadioButton x:Name="RadioAspectFill" Content="Fill" HorizontalAlignment="Left" FontFamily="Corbel" FontSize="13.333" RenderTransformOrigin="0.5,0.5" BorderThickness="2" GroupName="Aspect" Checked="RadioFill_Checked" VerticalAlignment="Top" Margin="21,10,0,-1" Padding="0" Foreground="#FF272727">
+                                <RadioButton.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                        <SkewTransform />
+                                        <RotateTransform />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </RadioButton.RenderTransform>
+                            </RadioButton>
+                            <Label x:Name="label" Content="Aspect Ratio" HorizontalAlignment="Left" FontSize="8" FontFamily="Corbel" VerticalAlignment="Top" Padding="0" Foreground="#FF272727" />
+                        </Grid>
+                        <TextBox x:Name="TextBoxMod1" Margin="0,0,92,0" Text="100" UndoLimit="10" IsUndoEnabled="False" MaxLines="1" AllowDrop="True" BorderThickness="0" Background="#FFF0F0F0" FontFamily="Corbel" HorizontalAlignment="Right" Width="15" FontSize="7" TextAlignment="Center" Height="10" VerticalAlignment="Bottom" Foreground="#FF272727" />
+                        <TextBox x:Name="TextBoxMod2" Margin="0,0,63,0" Text="100" VerticalAlignment="Bottom" UndoLimit="10" IsUndoEnabled="False" MaxLines="1" AllowDrop="True" BorderThickness="0" Background="#FFF0F0F0" FontFamily="Corbel" HorizontalAlignment="Right" Width="15" FontSize="7" TextAlignment="Center" Height="10" Foreground="#FF272727" />
+                        <TextBox x:Name="TextBoxMod3" Margin="0,0,35,0" Text="100" VerticalAlignment="Bottom" UndoLimit="10" IsUndoEnabled="False" MaxLines="1" AllowDrop="True" BorderThickness="0" Background="#FFF0F0F0" FontFamily="Corbel" HorizontalAlignment="Right" Width="15" FontSize="7" TextAlignment="Center" Height="10" Foreground="#FF272727" />
+                        <TextBox x:Name="TextBoxMod4" Margin="0,0,6,0" Text="100" VerticalAlignment="Bottom" UndoLimit="10" IsUndoEnabled="False" MaxLines="1" AllowDrop="True" BorderThickness="0" Background="#FFF0F0F0" FontFamily="Corbel" HorizontalAlignment="Right" Width="15" FontSize="7" TextAlignment="Center" Height="10" Foreground="#FF272727" />
+                        <RadioButton x:Name="RadioFormulaJD" Content="Julian'sche Spirale" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Corbel" FontSize="14.667" RenderTransformOrigin="0.5,0.5" BorderThickness="2" Margin="0,0,106,4" GroupName="AnimType" Checked="RadioSpirale_Checked" Foreground="#FF272727" IsChecked="True">
+                            <RadioButton.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </RadioButton.RenderTransform>
+                        </RadioButton>
+                    </Grid>
+                    <Expander x:Name="expander" Header="Options" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Corbel" Expanded="options_expanded" Collapsed="options_collapsed" Margin="2.878,-17.107,0,0" RenderTransformOrigin="0.5,0.5" FontSize="13.333" Background="#54FFFFFF" BorderBrush="{x:Null}" Foreground="#FF272727" BorderThickness="0" Width="71" UseLayoutRounding="False" IsExpanded="True" ExpandDirection="Up">
+                        <Expander.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="0.8" ScaleX="0.8" />
+                                <SkewTransform />
+                                <RotateTransform />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Expander.RenderTransform>
+                        <Expander.LayoutTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.7" ScaleY="0.7" />
+                                <SkewTransform />
+                                <RotateTransform />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Expander.LayoutTransform>
+                        <Grid Background="#FFE5E5E5" />
+                    </Expander>
+                </Grid>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</base:BasePage>
