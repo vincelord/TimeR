@@ -88,11 +88,11 @@
                 <ComboBox x:Name="ComboSelectedTimer" ItemsSource="{Binding Source={StaticResource ticker}, Path=AllTickerEntries, Mode=OneWay}"
                   DisplayMemberPath="Name"
                   SelectedValuePath="Name"
-                  SelectedValue="{Binding Source={StaticResource ticker}, Path=TickerEntry, Mode=OneWay}"
+                  SelectedValue="{Binding Source={StaticResource ticker}, Path=TickerEntry, Mode=TwoWay}"
                   Foreground="White" FontFamily="Helvetica Neue Light" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15, 0, 0, 0" Height="26" />
 
                 <!--<TextBlock x:Name="LabelTimerCurrentName" Text="{Binding Source={StaticResource ticker}, Path=Name, Mode=OneWay}" Foreground="White" FontFamily="Helvetica Neue Light" FontSize="18.667" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="4, 4, 0, 0" />-->
-                <Image x:Name="IconTimedActionType" Height="15" Margin="0,30,5,0" VerticalAlignment="Top" Source="/VTility;component/Resources/icon3.png" HorizontalAlignment="Right" Width="13" />
+                <Image x:Name="IconTimedActionType" Height="15" Margin="0,30,5,0" VerticalAlignment="Top" Source="{Binding Source={StaticResource ticker}, Path=TickerTypeImageSource, Mode=OneWay}" HorizontalAlignment="Right" Width="13" />
             </Grid>
         </Grid>
     </Viewbox>

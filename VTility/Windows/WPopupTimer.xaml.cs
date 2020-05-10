@@ -174,13 +174,20 @@ namespace VTility.Windows
                     ShutdownType sdType = ShutdownType.Shutdown;  // TODO get real value
                     bool force = true; // TODO get real value
 
-                    action = new TimedShutdownAction(sdType, nama, warn, force);
+                    action = new TimedShutdownAction(sdType, force, nama, warn);
+                    action.image = TimerImages.Shutdown;
                     break;
 
                 case TimedActionType.Notification:
                     var thetext = "bla";
-                    action = new TimedNotificationAction(nama, thetext, warn);
+                    action = new TimedNotificationAction(thetext, nama, warn);
+                    action.image = TimerImages.Notification;
+                    break;
 
+                case TimedActionType.Custom:
+                    // TODO
+                    //action = new TimedNotificationAction(nama, thetext, warn);
+                    //action.image = TimerImages.Custom;
                     break;
             }
 

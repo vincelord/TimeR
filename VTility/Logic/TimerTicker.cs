@@ -7,46 +7,44 @@ using System.Windows.Data;
 
 namespace VTility.Logic
 {
+    public class TimerImages
+    {
+        public const string Custom = "/VTility;component/Resources/timer-custom.png";
+        public const string Notification = "/VTility;component/Resources/timer-notification.png";
+        public const string Shutdown = "/VTility;component/Resources/timer-shutdown.png";
+    }
+
     public class TimerTicker : Multiton<TimerTicker>, INotifyPropertyChanged
     {
+        private CollectionView allTickerEntries;
+
+        private string tickerEntry;
+        private string tickerTypeImageSource;
         private Timer timer;
 
-        //public TimerTicker() : this(new UtilTimer()) { }
-        //public IEnumerable AllTickerEntries =>
-        private CollectionView _allTickerEntries;
+        public TimerTicker()
+        {
+            // start ticker and execute its action periodically
+            timer = new Timer();
+            timer.Interval = 1000; // 1 second updates
+            timer.Elapsed += timer_Elapsed;
+            timer.Start();
+
+            ReloadTickerEntries();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public CollectionView AllTickerEntries
         {
-            get => _allTickerEntries;
+            get => allTickerEntries;
             set
             {
-                if (_allTickerEntries == value) return;
-                _allTickerEntries = value;
+                if (allTickerEntries == value) return;
+                allTickerEntries = value;
                 OnPropertyChanged("AllTickerEntries");
             }
         }
-
-        private string _tickerEntry;
-
-        public string TickerEntry
-        {
-            get { return _tickerEntry; }
-            set
-            {
-                if (_tickerEntry == value) return;
-                _tickerEntry = value;
-
-                // set current instance to last selected
-                UtilTimer lastTimer = UtilTimer.AllCountdowns.Where((args) => args.Name.Equals(_tickerEntry)).First();
-                if (lastTimer != null)
-                    UtilTimer.Current = lastTimer;
-
-                OnPropertyChanged("TickerEntry");
-            }
-        }
-
-        public DateTime Now => DateTime.Now;
-        public string Name => UtilTimer.Current.Name ?? "Timer_Example";
 
         public string CountdownValue
         {
@@ -67,26 +65,52 @@ namespace VTility.Logic
             }
         }
 
-        public TimerTicker()
-        {
-            // start ticker and execute its action periodically
-            timer = new Timer();
-            timer.Interval = 1000; // 1 second updates
-            timer.Elapsed += timer_Elapsed;
-            timer.Start();
+        public string Name => UtilTimer.Current.Name ?? "Timer_Example";
 
-            ReloadTickerEntries();
+        public DateTime Now => DateTime.Now;
+
+        public string TickerEntry
+        {
+            get => tickerEntry;
+            set
+            {
+                if (tickerEntry == value) return;
+                tickerEntry = value;
+
+                // set current instance to last selected
+                var lastTimers = UtilTimer.AllCountdowns.Where((args) => args.Name.Equals(tickerEntry));
+                var lastTimer = lastTimers.Count() > 0 ? lastTimers.First() : null;
+                if (lastTimer != null)
+                    UtilTimer.Current = lastTimer;
+
+                OnPropertyChanged("TickerEntry");
+                //TimerTicker.Current.TickerTypeImageSource = UtilTimer.Current.countdownAction.image;
+                //OnPropertyChanged("TickerTypeImageSource");
+            }
+        }
+
+        public string TickerTypeImageSource
+        {
+            get => tickerTypeImageSource;
+            set
+            {
+                if (tickerTypeImageSource == value) return;
+                tickerTypeImageSource = value;
+                OnPropertyChanged("TickerTypeImageSource");
+            }
         }
 
         public static void ReloadTickerEntries(IList<UtilTimer> res = null)
         {
+            if (UtilTimer.Current == null)
+                return;
             Console.WriteLine("reloading all ticker entries");
 
+            // sync to utiltimer
             if (res == null)
                 res = UtilTimer.AllCountdowns;
             if (res == null)
                 res = new List<UtilTimer>();
-
             UtilTimer.AllCountdowns = res;
 
             // add all items to list and bind combobox to it
@@ -94,6 +118,9 @@ namespace VTility.Logic
 
             // set first element
             TimerTicker.Current.TickerEntry = UtilTimer.Current.Name;
+
+            // set action type image
+            TimerTicker.Current.TickerTypeImageSource = UtilTimer.Current.countdownAction.image;
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -101,16 +128,10 @@ namespace VTility.Logic
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Now"));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CountdownValue"));
-        }
-
-        internal static void SetUtilTimers()
-        {
+            OnPropertyChanged("Now");
+            OnPropertyChanged("CountdownValue");
         }
     }
 }

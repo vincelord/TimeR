@@ -27,7 +27,7 @@ namespace VTility.Logic
     {
         private static T s_current = null;
 
-        public static List<T> All;
+        public static List<T> All = new List<T>();
 
         protected Multiton()
         {
@@ -46,7 +46,7 @@ namespace VTility.Logic
 
         public static T Current
         {
-            get => s_current;
+            get => s_current ?? Last ?? new T();
             set => s_current = value;
         }
 

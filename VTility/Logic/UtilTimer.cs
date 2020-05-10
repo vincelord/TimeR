@@ -16,15 +16,17 @@ namespace VTility.Logic
     [Serializable]
     public abstract partial class TimedAction
     {
+        public string image;
         public string name;
         public TimedActionType type;
         public bool warn;
 
-        public TimedAction(TimedActionType type, string name, bool warn)
+        public TimedAction(TimedActionType type, string name, bool warn, string image)
         {
             this.name = name;
             this.type = type;
             this.warn = warn;
+            this.image = image;
         }
 
         public abstract void Execute();
@@ -35,7 +37,7 @@ namespace VTility.Logic
     {
         public string description;
 
-        public TimedNotificationAction(string name, string description, bool warn) : base(TimedActionType.Notification, name, warn)
+        public TimedNotificationAction(string description = "description text", string name = "notification", bool warn = true, string image = TimerImages.Notification) : base(TimedActionType.Notification, name, warn, image)
         {
             this.description = description;
         }
@@ -61,7 +63,7 @@ namespace VTility.Logic
 
         private ShutdownType shutdownType;
 
-        public TimedShutdownAction(ShutdownType shutdownType, string name, bool warn, bool optForce) : base(TimedActionType.Shutdown, name, warn)
+        public TimedShutdownAction(ShutdownType shutdownType = ShutdownType.Shutdown, bool optForce = true, string name = "shutdown", bool warn = true, string image = TimerImages.Shutdown) : base(TimedActionType.Shutdown, name, warn, image)
         {
             this.shutdownType = shutdownType;
             this.optForce = optForce;
@@ -129,13 +131,14 @@ namespace VTility.Logic
         [NonSerialized]
         private DispatcherTimer countdownDispatcher;
 
-        public UtilTimer() : this(new TimedNotificationAction("default", "", false), "00:15:00")
-        {
-        }
-
         static UtilTimer()
         {
             AllCountdowns = new List<UtilTimer>();
+        }
+
+        // will be used for wpf editor preview
+        public UtilTimer() : this(new TimedShutdownAction(), "00:15:00")
+        {
         }
 
         public UtilTimer(TimedAction actionOrResource, string timestring)
@@ -389,7 +392,8 @@ namespace VTility.Logic
             if (lastTimerName != null && AllCountdowns.Count > 0)
             {
                 // check cache for object before creating a new one
-                UtilTimer lastTimer = AllCountdowns.Where((args) => args.Name.Equals(lastTimerName)).First();
+                var lastTimers = AllCountdowns.Where((args) => args.Name.Equals(lastTimerName));
+                UtilTimer lastTimer = lastTimers.Count() > 0 ? lastTimers.First() : null;
 
                 // set last used timer to active scope
                 if (lastTimer == null)
